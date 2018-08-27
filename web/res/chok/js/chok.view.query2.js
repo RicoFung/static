@@ -201,6 +201,16 @@ $chok.view.query.fn.getIdSelections = function(){
         return row.id
     });
 };
+$chok.view.query.fn.getValSelectionsByKey = function(key){
+	return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
+		return row[key];
+	});
+};
+$chok.view.query.fn.getSelections = function(){
+	return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
+		return row;
+	});
+};
 // 获取表格列
 $chok.view.query.fn.getColumns = function(){
 	var columns = 
