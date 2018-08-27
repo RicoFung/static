@@ -1,0 +1,1 @@
+$chok.view.upd = {};

@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+/* 所有iframe内容去除横向滚动条 */
+/*  html {overflow-x:hidden;}  */
+.body-content {padding-left:5px;padding-right:5px;}
+.navbar-extend {border-radius:4px;border: 1px solid transparent;border-color: #e7e7e7;}
+.navbar-header-extend {width:100%;}
+.navbar-header-btn-right {float:right;padding-right:5px}
+.dataForm {}
+/* 使iframe支持移动端webkit浏览器滚动 */
+.scroll-wrapper {  
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; 
+    /* 提示: 请在此处加上需要设置的大小(dimensions)或位置(positioning)信息! */ 
+}  
+.scroll-wrapper iframe {  
+    /* 你自己指定的样式 */  
+}  
