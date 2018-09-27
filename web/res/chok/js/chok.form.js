@@ -81,4 +81,8 @@ $(function(){
         $.ajax(options);
         return false;
 	});
+	// oauth 登出
+	$("#user-dropdown-menu [menuId='logout']").click(function(){
+		$("#oauthLogoutForm").submit();
+	});
 });
