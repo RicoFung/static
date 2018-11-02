@@ -146,7 +146,8 @@ function ajaxRequest(params){
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
     		$.LoadingOverlay("hide");
-    		$.alert({title: "提示", content: XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText});
+    		$.alert({title: "提示", content: XMLHttpRequest.responseText});
+//    		$.alert({title: "提示", content: XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText});
         }  
     });
 }
