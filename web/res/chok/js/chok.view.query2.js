@@ -50,19 +50,12 @@ $chok.view.query.callback.onEditableSave = function(field, row, oldValue, $el){
         dataType: 'JSON',
         success: function (data, status) {
             if (status=="success") {
-            		$.alert({title: "提示", content: $chok.checkResult(data)});
-        			$("#tb_list").bootstrapTable('refresh'); // 刷新table
+        		$.alert({title: "提示", content: $chok.checkResult(data)});
+    			$("#tb_list").bootstrapTable('refresh'); // 刷新table
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            /*弹出jqXHR对象的信息*/
-			$.alert({title: "提示", content: $chok.checkResult(jqXHR.responseText)});
-//            alert(jqXHR.status);
-//            alert(jqXHR.readyState);
-//            alert(jqXHR.statusText);
-            /*弹出其他两个参数的信息*/
-//            alert(textStatus);
-//            alert(errorThrown);
+    		$.alert({title: "提示", type: "red", content: jqXHR.responseText});
         }
     });
 };
@@ -103,18 +96,27 @@ $chok.view.query.init.toolbar = function(){
 		$.confirm({
 		    title: "提示",
 		    content: "确认删除？",
-		    type: "red",
+		    type: "orange",
 		    typeAnimated: true,
 		    buttons: {
 		        ok: function() {
-			    		$.post("del",{id:$chok.view.query.fn.getIdSelections()},function(result){
-			    	        $chok.view.query.callback.delRows(result); // 删除行回调
-			    	        if(!result.success) {
-				    	        	$.alert({title: "提示", content: result.msg});
-				    	        	return;
-			    	        }
+		            $.ajax({
+		                type: 'post',
+		                url: 'del',
+		                dataType: 'JSON',
+		                data: {id: $chok.view.query.fn.getIdSelections()},
+		                success: function(result){
+	                		$.LoadingOverlay("hide");
+	        	        	if(result.success==false){
+	        	        		$.alert({title: "提示", type: "red", content: result.msg});
+	        	        		return;
+	        	        	}
 			    	        $("#tb_list").bootstrapTable('refresh'); // 刷新table
-			    		});
+		                },
+		                error: function (jqXHR, textStatus, errorThrown) {
+		            		$.alert({title: "提示", type: "red", content: jqXHR.responseText});
+		                }
+		            });
 		        },
 		        close: function () {
 		        }
@@ -129,10 +131,10 @@ function ajaxRequest(params){
     //访问服务器获取所需要的数据
     //比如使用$.ajax获得请求某个url获得数据
     $.ajax({
-        type : 'post',
-        url : 'query2',
-        data : params.data,
-        success : function(result){
+        type: 'post',
+        url: 'query2',
+        data: params.data,
+        success: function(result){
         		$.LoadingOverlay("hide");
 	        	if(result.success==false){
 	        		$.alert({title: "提示", content: result.msg});
@@ -146,8 +148,7 @@ function ajaxRequest(params){
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
     		$.LoadingOverlay("hide");
-    		$.alert({title: "提示", content: XMLHttpRequest.status + "<br/>" + XMLHttpRequest.responseText});
-//    		$.alert({title: "提示", content: XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText});
+    		$.alert({title: "提示", type: "red", content: jqXHR.responseText});
         }  
     });
 }
