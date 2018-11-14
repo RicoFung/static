@@ -55,7 +55,7 @@ $chok.view.query.callback.onEditableSave = function(field, row, oldValue, $el){
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-    		$.alert({title: "提示", type: "red", content: jqXHR.responseText});
+    		$.alert({title: "提示", type: "red", content: jqXHR.status + "<br/>" + jqXHR.responseText});
         }
     });
 };
@@ -114,7 +114,7 @@ $chok.view.query.init.toolbar = function(){
 			    	        $("#tb_list").bootstrapTable('refresh'); // 刷新table
 		                },
 		                error: function (jqXHR, textStatus, errorThrown) {
-		            		$.alert({title: "提示", type: "red", content: jqXHR.responseText});
+		            		$.alert({title: "提示", type: "red", content: jqXHR.status + "<br/>" + jqXHR.responseText});
 		                }
 		            });
 		        },
@@ -148,7 +148,7 @@ function ajaxRequest(params){
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
     		$.LoadingOverlay("hide");
-    		$.alert({title: "提示", type: "red", content: jqXHR.responseText});
+    		$.alert({title: "提示", type: "red", content: jqXHR.status + "<br/>" + jqXHR.responseText});
         }  
     });
 }
