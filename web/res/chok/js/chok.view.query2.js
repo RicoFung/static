@@ -62,9 +62,9 @@ $chok.view.query.callback.onEditableSave = function(field, row, oldValue, $el){
 //右键菜单点击事件 
 $chok.view.query.callback.onContextMenuItem = function(row, $el){
 	if ($el.data("item")=="upd"){
-		location.href = "upd?id="+row.id+"&"+$chok.view.query.fn.getUrlParams();
+		location.href = "upd?id="+row.m.id+"&"+$chok.view.query.fn.getUrlParams();
 	} else if ($el.data("item")=="get"){
-		location.href = "get?id="+row.id+"&"+$chok.view.query.fn.getUrlParams();
+		location.href = "get?id="+row.m.id+"&"+$chok.view.query.fn.getUrlParams();
 	}
 };
 /* **************************************************************************************************************
@@ -146,10 +146,10 @@ function ajaxRequest(params){
 	            rows : result.rows
 	        });
         },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
+        error: function(jqXHR, textStatus, errorThrown){
     		$.LoadingOverlay("hide");
     		$.alert({title: "提示", type: "red", content: jqXHR.status + "<br/>" + jqXHR.responseText});
-        }  
+        } 
     });
 }
 $chok.view.query.init.table = function(pageNum, pageSize){
@@ -200,27 +200,8 @@ $chok.view.query.fn = {};
 // 获取已选行的ID集合
 $chok.view.query.fn.getIdSelections = function(){
     return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
-        return row.id
+        return row.m.id
     });
-};
-$chok.view.query.fn.getValSelectionsByKey = function(key){
-	return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
-		return row[key];
-	});
-};
-$chok.view.query.fn.getSelections = function(){
-	return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
-		return row;
-	});
-};
-$chok.view.query.fn.getValSelectionsByKey2 = function(keys){
-	return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
-		var e = {};
-		for (i=0; i<keys.length; i++) {
-			e[keys[i]] = row[keys[i]];
-		}
-		return e;
-	});
 };
 // 获取表格列
 $chok.view.query.fn.getColumns = function(){
