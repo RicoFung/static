@@ -9,6 +9,7 @@ $chok.view.query.config.setPreFormParams = function(){};//保留上次表单参�
 $chok.view.query.config.formParams = function(p){return p;};//配置表单参数
 $chok.view.query.config.urlParams = function(){return {};};//配置url表单参数
 $chok.view.query.config.tableColumns = [];//配置表格列//配置行菜单
+$chok.view.query.config.showColumns = false;//是否可显示隐藏列
 $chok.view.query.config.showMultiSort = false;// 是否显示多列排序
 $chok.view.query.config.sortPriority = [{"sortName":"m.id","sortOrder":"asc"}];
 $chok.view.query.config.operateFormatter = function(value, row, index){
@@ -146,7 +147,7 @@ function ajaxRequest(params){
 	            rows : result.rows
 	        });
         },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
+        error: function(jqXHR, textStatus, errorThrown){
     		$.LoadingOverlay("hide");
     		$.alert({title: "提示", type: "red", content: jqXHR.status + "<br/>" + jqXHR.responseText});
         }  
@@ -166,7 +167,7 @@ $chok.view.query.init.table = function(pageNum, pageSize){
 		toolbar: "#toolbar",
         showRefresh: true,
         showToggle: true,
-        showColumns: true,
+        showColumns: $chok.view.query.config.showColumns,
         showExport: true,
         showMultiSort: $chok.view.query.config.showMultiSort,
         sortPriority: $chok.view.query.config.sortPriority,
