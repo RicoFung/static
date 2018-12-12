@@ -11,7 +11,7 @@ $chok.view.query.config.urlParams = function(){return {};};//配置url表单参�
 $chok.view.query.config.tableColumns = [];//配置表格列//配置行菜单
 $chok.view.query.config.showColumns = false;//是否可显示隐藏列
 $chok.view.query.config.showMultiSort = false;// 是否显示多列排序
-$chok.view.query.config.sortPriority = [{"sortName":"m.id","sortOrder":"asc"}];
+$chok.view.query.config.sortPriority = [{"sortName":"id","sortOrder":"asc"}];
 $chok.view.query.config.operateFormatter = function(value, row, index){
     return [
 	        "<div class='btn-group btn-group-xs'>",
