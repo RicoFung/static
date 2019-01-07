@@ -8,7 +8,6 @@
     	    cascadeid:null,
     		k:"name",
     		v:"id",
-    		firstOptionKey:"请选择",
     		callback:{
     			afterload:function(){}
     		}
@@ -76,7 +75,7 @@
     		success: function(result,status,xhr) {
     			// 重新渲染 option
     	    	$el.empty();
-    	    	$el.append("<option value=\"\">"+opt.firstOptionKey+"</option>");
+    	    	$el.append("<option value=\"\">All</option>");
     	    	for(var i=0; i<result.length; i++){
     	    		$el.append("<option value=\""+result[i][opt.v]+"\">"+result[i][opt.k]+"</option>");
     	    	}
