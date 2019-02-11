@@ -46,12 +46,13 @@ $(function(){
             enctype: $("#dataForm").attr("enctype"),
             success: function (data) {
     			$.LoadingOverlay("hide");
-    			$.alert({title: "提示", content: $chok.checkResult(data)});
+    			$chok.checkResult(data);
+    			$.alert({title: "提示", type: $chok.result.type=="1"?"green":"red", content: $chok.result.msg});
                 $chok.form.callback();
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
+            error: function(jqXHR, textStatus, errorThrown){
         		$.LoadingOverlay("hide");
-        		$.alert({title: "提示", content: XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText});
+        		$.alert({title: "提示", type: "red", content: jqXHR.status + "<br/>" + jqXHR.responseText});
             } 
         };
         $("#dataForm").ajaxSubmit(options);
