@@ -74,11 +74,15 @@
     		url: opt.url,
     		data:param,
     		success: function(result,status,xhr) {
+    			if (!result.success) {
+    	        	$.alert({title: "提示", type:"red", content: result.msg});
+    				return;
+    			}
     			// 重新渲染 option
     	    	$el.empty();
     	    	$el.append("<option value=\"\">"+opt.firstOptionKey+"</option>");
-    	    	for(var i=0; i<result.length; i++){
-    	    		$el.append("<option value=\""+result[i][opt.v]+"\">"+result[i][opt.k]+"</option>");
+    	    	for(var i=0; i<result.data.options.length; i++){
+    	    		$el.append("<option value=\""+result.data.options[i][opt.v]+"\">"+result.data.options[i][opt.k]+"</option>");
     	    	}
     	    	// 通过隐藏域更新值
     	    	var $el_hidden =  $("#f_"+$el.attr("id"));
@@ -93,6 +97,7 @@
     	    	opt.callback.afterload($el);
     		},
     		error: function(xhr,status,error) {
+	        	$.alert({title: "提示", type:"red", content: error});
     		}
     	});
     }
