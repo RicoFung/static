@@ -86,4 +86,8 @@ $(function(){
 	$("#user-dropdown-menu [menuId='logout']").click(function(){
 		$("#oauthLogoutForm").submit();
 	});
+	// 修改密码
+	$("#user-dropdown-menu [menuId='password']").click(function(){
+		$("#passwordForm").submit();
+	});
 });
